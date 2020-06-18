@@ -10,7 +10,6 @@ if [ "$enable_multithreading" = "true" ]; then
 fi
 
 out_file="$BENCHMARK_OUT_DIR/java_gradle_$run.csv"
-[ test -f $out_file ] || touch $out_file
 
 printf "%s," $REVISION >> $out_file
 
