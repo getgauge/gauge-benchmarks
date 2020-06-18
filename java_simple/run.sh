@@ -10,6 +10,8 @@ if [ "$enable_multithreading" = "true" ]; then
 fi
 
 out_file="$BENCHMARK_OUT_DIR/java_simple_$run.csv"
+[ test -f $out_file ] || touch $out_file
+
 printf "%s," $REVISION >> $out_file
 
 /usr/bin/time -f "%P,%M,%E,%x" -a -o $out_file gauge run specs $flags > /dev/null 2>&1
