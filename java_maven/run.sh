@@ -1,0 +1,14 @@
+run="serial"
+
+if [ "$PARALLEL" = "true" ]; then
+    run="parallel"
+    flags="-PinParallel=true"
+fi
+
+if [ "$enable_multithreading" = "true" ]; then
+    run+="_multithreaded"
+fi
+
+mvn test-compile > /dev/null 2>&1
+/usr/bin/time -f "%P,%M,%E,%x" -a -o "$BENCHMARK_OUT_DIR/java_maven_$run.csv" mvn -q gauge:execute $flags > /dev/null 2>&1
+
