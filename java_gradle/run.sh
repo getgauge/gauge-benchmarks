@@ -8,7 +8,7 @@ fi
 if [ "$enable_multithreading" = "true" ]; then
     run+="_multithreaded"
 fi
-
+REVISION=`gauge version | grep "Commit Hash:" | awk '/Commit Hash: /{print $NF}'`
 out_file="$BENCHMARK_OUT_DIR/java_gradle_$run.csv"
 
 printf "%s," $REVISION >> $out_file

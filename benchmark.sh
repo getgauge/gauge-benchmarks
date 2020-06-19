@@ -10,8 +10,6 @@ glob_pattern=${2:-!($out_dir)}
 
 mkdir -p $BENCHMARK_OUT_DIR
 
-export REVISION=`gauge version | grep "Commit Hash:" | awk '/Commit Hash: /{print $NF}'`
-
 for d in $glob_pattern/; do
     echo "run $d in serial"
     $(cd $d && ./run.sh)
