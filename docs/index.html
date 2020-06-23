@@ -1,12 +1,19 @@
 <html>
     <head>
         <title>Benchmark Results</title>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+        <link href="assets/images/favicon.ico" rel="shortcut icon" type="image/ico"/>
         <style>
             body {
                 text-align: center;
-                background: #1a1c19 url("https://gauge.org/assets/images/home-page_banner_desktop.png") no-repeat center bottom;
-                background-size: cover;
+                background: linear-gradient( 
+                    to bottom, 
+                    rgba(26, 28, 25, 0), 
+                    rgba(26, 28, 25, 100)),
+                    #1a1c19 url("assets/images/home-page_banner_desktop.png") no-repeat center top;
+                background-size: contain;
                 color: #fff;
+                font-family: "Open Sans", sans-serif;
             };
 
             header.container {
@@ -18,39 +25,9 @@
                 margin-top: 1em;
             }            
 
-            header.container>h1 {
-                margin-top: 0.2em;
-                margin-left: 0.2em;
-            }
-
-            .columns {
-                display: flex;
-                flex-flow: row wrap;
-                justify-content: center;
-                margin: 3rem 0;
-            }
-
-            .column {
-                flex: 1;
-                border: 1px solid gray;
-                margin: 2px;
-                padding: 10px;
-                width: 33% !important;
-            }
-
-            .column:first-child {
-                margin-left: 0;
-            }
-
-            .column:last-child {
-                margin-right: 0;
-            }
             .spacer {
                 padding-left: 10px;
                 padding-right: 10px;
-            }
-            footer {
-                padding: 0 15px;
             }
 
             #limit {
@@ -61,32 +38,15 @@
                 color: #ffcc00
             }
 
-            @media screen and (max-width: 980px) {
-                .columns .column {
-                    margin-bottom: 5px;
-                    flex-basis: 40%;
-                }
-
-                .columns .column:nth-last-child(2) {
-                    margin-right: 0;
-                }
-
-                .columns .column:last-child {
-                    flex-basis: 100%;
-                    margin: 0;
-                }
-            }
-            @media screen and (max-width: 680px) {
-                .columns .column {
-                    flex-basis: 100%;
-                    margin: 0 0 5px 0;
-                }
+            .charts {
+                width: 75%;
+                display: inline-block;
             }
         </style>
     </head>
     <body>
         <header class="container">
-            <img class="logo" src="https://gauge.org/assets/images/gauge-logo_white.svg">
+            <img class="logo" src="assets/images/gauge-logo_white.svg">
             <h3>Benchmark Trends</h3>
             <h4>Target: Gauge | Latest Commit: <a id="latest-commit" href="#"></a></h4>
             <select id="project">
@@ -98,14 +58,14 @@
             <label for="limit">No. of commits</label>
             <input id="limit" value="20"/>
         </header>
-        <section class="columns">
-            <div class="column">
+        <section class="charts">
+            <div class="chart">
                 <canvas id="cpu-trend"></canvas>
             </div>
-            <div class="column">
+            <div class="chart">
                 <canvas id="memory-trend"></canvas>
             </div>
-            <div class="column">
+            <div class="chart">
                 <canvas id="time-trend"></canvas>
             </div>
         </section>
@@ -135,11 +95,31 @@
                             datasets: []
                         },
                         options: {
+                            legend: {
+                                labels: {
+                                    fontColor: '#ffcc00',
+                                    fontFamily: '"Open Sans", sans-serif',
+                                }
+                            },
                             responsive: true,
                             tooltips: { mode: 'index', intersect: false, },
                             hover: { mode: 'nearest', intersect: true },
-                            title: { display: true, text: titles[m] },
-                            scales: { yAxes: [{ ticks: { beginAtZero: true, fontColor: "#ffcc00" }}], xAxes: [{ ticks: { beginAtZero: true, fontColor: "#ffcc00" }}]}
+                            title: { 
+                                display: true, 
+                                text: titles[m], 
+                                fontColor: '#ffcc00',
+                                fontFamily: '"Open Sans", sans-serif',
+                            },
+                            scales: { 
+                                yAxes: [{ 
+                                    gridLines: {color: 'rgba(255, 204, 0, 0.2)'},
+                                    ticks: { beginAtZero: true, fontColor: "#ffcc00" }
+                                }], 
+                                xAxes: [{ 
+                                    gridLines: {color: 'rgba(255, 204, 0, 0.2)'},
+                                    ticks: { beginAtZero: true, fontColor: "#ffcc00" }}
+                                ]
+                            }
                         }
                     };
                     charts[m] = new Chart(ctx, chartConfig[m]);
