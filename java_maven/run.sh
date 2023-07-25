@@ -2,7 +2,7 @@ run="serial"
 
 if [ "$PARALLEL" = "true" ]; then
     run="parallel"
-    flags="-PinParallel=true"
+    flags="-DinParallel=true"
 fi
 
 if [ "$enable_multithreading" = "true" ]; then
