@@ -39,7 +39,7 @@
             <plugin>
                 <groupId>com.thoughtworks.gauge.maven</groupId>
                 <artifactId>gauge-maven-plugin</artifactId>
-                <version>1.6.3</version>
+                <version>1.6.4</version>
                 <executions>
                     <execution>
                         <phase>test</phase>
